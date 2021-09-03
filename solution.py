@@ -11,7 +11,7 @@ def print_flight(flight):
             ret += '                "{}": "{}"\n'.format(column_names[i], x)
         i += 1
     ret += '            }\n'
-    ret += '        ]\n'
+    ret += '        ]'
     return ret
 
 
@@ -58,11 +58,17 @@ if not origin_present or not destination_present:
 exit_file = open("returnfile.json", "w")
 exit_file.write("[\n")
 exit_file.write("    {\n")
-#for flight in list_of_flights:
-    #if flight[1] == origin and flight[2] == destination:
-exit_file.write(print_flight(flight))
+j = 0
+for flight in list_of_flights:
+    if flight[1] == origin and flight[2] == destination:
+        if j > 0:
+            exit_file.write(",\n")
+        else:
+            exit_file.write("\n")
+        exit_file.write(print_flight(flight))
+        j+=1
 exit_file.write("    }\n")
 exit_file.write("]\n")
 
-#TODO dokoncit spracovanie JSON aspon pre priamy let
+#TODO lety vkladat do listu, z ktoreho potom brat a nasledne vypisovat do JSONu
 #TODO skusit nieco pre vyhladavanie viacerych spojeni
